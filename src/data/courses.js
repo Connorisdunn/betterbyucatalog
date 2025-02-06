@@ -1,0 +1,93 @@
+export const courses = [
+    {
+      id: 1,
+      code: "CS 340",
+      name: "Full Stack Web Development",
+      credits: 3,
+      difficulty: 4,
+      description: "Learn modern web development including React, Node.js, and databases. Build full-stack applications with industry-standard practices.",
+      department: "CS",
+      days: ["M", "W", "F"],
+      type: "In-Person",
+      interests: ["React", "HTML", "JavaScript"],
+      semesters: ["Fall '25", "Winter '26"]
+    },
+    {
+      id: 2,
+      code: "MATH 313",
+      name: "Linear Algebra",
+      credits: 3,
+      difficulty: 3,
+      description: "Study of linear equations, matrices, vector spaces, linear transformations, determinants, and eigenvalues.",
+      department: "MATH",
+      days: ["T", "TH"],
+      type: "Hybrid",
+      interests: ["Calc"],
+      semesters: ["Winter '25", "Fall '25"]
+    },
+    {
+      id: 3,
+      code: "CS 450",
+      name: "Machine Learning",
+      credits: 3,
+      difficulty: 4,
+      description: "Introduction to machine learning concepts including supervised learning, unsupervised learning, and deep learning using Python and popular ML libraries.",
+      department: "CS",
+      days: ["M", "W"],
+      type: "Online",
+      interests: ["Python", "R"],
+      semesters: ["Fall '26", "Winter '26"]
+    },
+    {
+      id: 4,
+      code: "CS 260",
+      name: "Data Structures",
+      credits: 4,
+      difficulty: 5,
+      description: "Fundamental data structures and algorithms including arrays, linked lists, trees, graphs, sorting algorithms, and complexity analysis.",
+      department: "CS",
+      days: ["M", "W", "F"],
+      type: "In-Person",
+      interests: ["Java", "Algorithms"],
+      semesters: ["Fall '25", "Spring '26"]
+    },
+    {
+      id: 5,
+      code: "PHYS 221",
+      name: "University Physics I",
+      credits: 4,
+      difficulty: 4,
+      description: "Calculus-based physics covering mechanics, kinematics, energy, momentum, and rotational motion with laboratory experiments.",
+      department: "PHYS",
+      days: ["T", "TH"],
+      type: "In-Person",
+      interests: ["Physics", "Calc"],
+      semesters: ["Winter '25", "Fall '25", "Winter '26"]
+    },
+    {
+      id: 6,
+      code: "CS 356",
+      name: "Operating Systems",
+      credits: 3,
+      difficulty: 4,
+      description: "Principles of operating systems including process management, memory management, file systems, and concurrent programming.",
+      department: "CS",
+      days: ["T", "TH"],
+      type: "Hybrid",
+      interests: ["C", "Systems"],
+      semesters: ["Fall '25", "Winter '26"]
+    },
+    {
+      id: 7,
+      code: "CS 465",
+      name: "Computer Security",
+      credits: 3,
+      difficulty: 3,
+      description: "Introduction to computer security principles, cryptography, network security, web security, and common attack vectors.",
+      department: "CS",
+      days: ["M", "W"],
+      type: "Online",
+      interests: ["Networking", "Cryptography"],
+      semesters: ["Winter '26", "Spring '26"]
+    }
+  ];
