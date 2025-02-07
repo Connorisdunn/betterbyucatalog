@@ -63,11 +63,17 @@ body {
   position: relative;
   transition: width var(--panel-transition), opacity var(--panel-transition);
   width: var(--panel-width);
+  min-width: 32px;
 }
 
 .pinned-courses-wrapper.closed {
-  width: 0;
+  width: 32px;
+  opacity: 1;
+}
+
+.pinned-courses-wrapper.closed .pinned-courses {
   opacity: 0;
+  visibility: hidden;
 }
 
 .pinned-courses-wrapper.open {
