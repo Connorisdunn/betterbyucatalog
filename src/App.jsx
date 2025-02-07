@@ -1,6 +1,5 @@
-// src/App.jsx
 import React, { useState } from 'react';
-import { FaStar, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaStar, FaExternalLinkAlt, FaThumbtack, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { courses } from './data/courses';
 import { departments } from './data/departments';
 import { Dropdown } from './components/Dropdown';
@@ -10,6 +9,8 @@ import DOMPurify from 'dompurify';
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSemester, setSelectedSemester] = useState("Fall '25");
+  const [pinnedCourses, setPinnedCourses] = useState([]);
+  const [isPinnedPanelOpen, setIsPinnedPanelOpen] = useState(true);
 
   const semesters = ["Fall '25", "Winter '25", "Fall '26", "Winter '26"];
   const interests = ['Python', 'Calc', 'React', 'Java', 'R', 'HTML', 'JavaScript', 'C++'];
@@ -18,6 +19,18 @@ function App() {
     return [...Array(difficulty)].map((_, index) => (
       <FaStar key={index} />
     ));
+  };
+
+  const togglePin = (course) => {
+    setPinnedCourses(prev => 
+      prev.some(c => c.id === course.id)
+        ? prev.filter(c => c.id !== course.id)
+        : [...prev, course]
+    );
+    // Open the panel when a course is pinned
+    if (!isPinnedPanelOpen) {
+      setIsPinnedPanelOpen(true);
+    }
   };
 
   const getFilteredAndSortedCourses = () => {
@@ -32,12 +45,41 @@ function App() {
       .sort((a, b) => b.searchResult.score - a.searchResult.score);
   };
 
-  const renderHighlightedText = (text, type) => {
+  const renderHighlightedText = (text) => {
     if (!searchTerm) return text;
     const highlighted = highlightText(text, searchTerm);
-    // Sanitize the HTML to prevent XSS attacks
     return <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(highlighted) }} />;
   };
+
+  const CourseCard = ({ course, isPinned, showPin = true }) => (
+    <div className={`course-card ${isPinned ? 'border-2 border-blue-600' : ''}`}>
+      <div className="card-header">
+        <div className="title-section">
+          <span className="course-title">
+            {renderHighlightedText(course.code)}
+          </span>
+          <span className="stars">
+            {renderStars(course.difficulty)}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="credit-hours">{course.credits} Credits</span>
+          {showPin && (
+            <button 
+              onClick={() => togglePin(course)}
+              className={`pin-button ${isPinned ? 'text-blue-600' : 'text-gray-400'}`}
+              title={isPinned ? 'Unpin course' : 'Pin course'}
+            >
+              <FaThumbtack />
+            </button>
+          )}
+        </div>
+      </div>
+      <p className="description">
+        {renderHighlightedText(course.description)}
+      </p>
+    </div>
+  );
 
   return (
     <>
@@ -45,7 +87,7 @@ function App() {
         <h1>BYU Course Catalog</h1>
       </header>
 
-      <div className="container">
+      <div className={`container ${isPinnedPanelOpen ? 'panel-open' : 'panel-closed'}`}>
         <div className="filters">
           <h2 className="filters-title">Filters</h2>
 
@@ -123,23 +165,44 @@ function App() {
 
           <div className="course-grid">
             {getFilteredAndSortedCourses().map(course => (
-              <div key={course.id} className="course-card">
-              <div className="card-header">
-                <div className="title-section">
-                  <span className="course-title">
-                    {renderHighlightedText(course.code)}
-                  </span>
-                  <span className="stars">
-                    {renderStars(course.difficulty)}
-                  </span>
-                </div>
-                <span className="credit-hours">{course.credits} Credits</span>
-              </div>
-              <p className="description">
-                {renderHighlightedText(course.description)}
-              </p>
-            </div>
+              <CourseCard 
+                key={course.id} 
+                course={course}
+                isPinned={pinnedCourses.some(c => c.id === course.id)}
+              />
             ))}
+          </div>
+        </div>
+
+        <div className={`pinned-courses-wrapper ${isPinnedPanelOpen ? 'open' : 'closed'}`}>
+          <button 
+            className="toggle-panel-button"
+            onClick={() => setIsPinnedPanelOpen(!isPinnedPanelOpen)}
+            title={isPinnedPanelOpen ? 'Hide pinned courses' : 'Show pinned courses'}
+          >
+            {isPinnedPanelOpen ? <FaChevronRight /> : <FaChevronLeft />}
+          </button>
+          <div className="pinned-courses">
+            <h2 className="pinned-title">
+              Pinned Courses
+              {pinnedCourses.length > 0 && <span className="pinned-count">({pinnedCourses.length})</span>}
+            </h2>
+            <div className="pinned-list">
+              {pinnedCourses.length === 0 ? (
+                <p className="text-gray-500 text-center py-4">
+                  Pin courses to add them to this list
+                </p>
+              ) : (
+                pinnedCourses.map(course => (
+                  <CourseCard 
+                    key={course.id} 
+                    course={course}
+                    isPinned={true}
+                    showPin={false}
+                  />
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>

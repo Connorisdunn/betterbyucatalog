@@ -7,6 +7,8 @@
   --byu-blue: #002E5D;
   --byu-navy: #041E42;
   --light-gray: #f5f5f5;
+  --panel-width: 300px;
+  --panel-transition: 0.3s ease-in-out;
 }
 
 * {
@@ -34,19 +36,98 @@ body {
 }
 
 .container {
-  display: flex;
-  padding: 20px;
+  display: grid;
   gap: 20px;
-  max-width: 1400px;
+  padding: 20px;
+  max-width: 1800px;
   margin: 0 auto;
+  transition: grid-template-columns var(--panel-transition);
+}
+
+.container.panel-open {
+  grid-template-columns: 300px 1fr var(--panel-width);
+}
+
+.container.panel-closed {
+  grid-template-columns: 300px 1fr 0;
 }
 
 .filters {
   background: white;
   padding: 24px;
   border-radius: 8px;
-  width: 300px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pinned-courses-wrapper {
+  position: relative;
+  transition: width var(--panel-transition), opacity var(--panel-transition);
+  width: var(--panel-width);
+}
+
+.pinned-courses-wrapper.closed {
+  width: 0;
+  opacity: 0;
+}
+
+.pinned-courses-wrapper.open {
+  opacity: 1;
+}
+
+.toggle-panel-button {
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease;
+}
+
+.toggle-panel-button:hover {
+  background: var(--byu-blue);
+  color: white;
+}
+
+.pinned-courses {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+  overflow: hidden;
+}
+
+.pinned-title {
+  color: var(--byu-blue);
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pinned-count {
+  font-size: 1rem;
+  color: #666;
+}
+
+.pinned-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .filters-title {
@@ -209,6 +290,7 @@ body {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
 }
 
 .card-header {
@@ -240,9 +322,9 @@ body {
 
 .stars {
   color: goldenrod;
-  display: flex; /* Add this line to make stars horizontal */
-  align-items: center; /* Optional: for vertical alignment */
-  gap: 2px; /* Optional: adds some space between stars */
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .description {
@@ -254,6 +336,16 @@ body {
   overflow: hidden;
 }
 
+.pin-button {
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pin-button:hover {
+  transform: scale(1.1);
+}
+
 mark {
   background-color: #fff3cd;
   padding: 0 2px;
@@ -263,4 +355,44 @@ mark {
 
 .course-card:has(mark) {
   border: 2px solid var(--byu-blue);
+}
+
+@media (max-width: 1400px) {
+  .container.panel-open {
+    grid-template-columns: 250px 1fr 250px;
+  }
+  
+  :root {
+    --panel-width: 250px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container.panel-open {
+    grid-template-columns: 220px 1fr 220px;
+  }
+  
+  :root {
+    --panel-width: 220px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container.panel-open,
+  .container.panel-closed {
+    grid-template-columns: 1fr;
+  }
+  
+  .filters, .pinned-courses-wrapper {
+    position: static;
+    width: 100% !important;
+  }
+  
+  .pinned-courses-wrapper.closed {
+    display: none;
+  }
+  
+  .toggle-panel-button {
+    display: none;
+  }
 }
