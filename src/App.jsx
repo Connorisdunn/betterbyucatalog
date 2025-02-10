@@ -17,13 +17,9 @@ function App() {
   const [selectedInterests, setSelectedInterests] = useState([]);
 
   const semesters = [
-    { term: 'Winter 2025', type: 'winter' },
-    { term: 'Spring 2025', type: 'spring' },
-    { term: 'Summer 2025', type: 'summer' },
     { term: 'Fall 2025', type: 'fall' },
     { term: 'Winter 2026', type: 'winter' },
     { term: 'Spring 2026', type: 'spring' },
-    { term: 'Summer 2026', type: 'summer' },
     { term: 'Fall 2026', type: 'fall' }
   ];
   
