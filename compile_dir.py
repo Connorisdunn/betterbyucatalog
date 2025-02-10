@@ -1,5 +1,5 @@
 """
-This script collects the repository's .jsx (and optionally .css) files along with a directory tree structure
+This script collects the repository's .jsx, .js (and optionally .css) files along with a directory tree structure
 and outputs them to an "output.md" file. You can use the generated Markdown file to send the repository contents
 to an AI for analysis, questions, or to propose code modifications.
 
@@ -8,8 +8,7 @@ Configuration:
 """
 
 # Configuration flag: set to True to include .css files, or False to ignore them.
-include_css_files = True
-
+include_css_files = False
 
 import os
 
@@ -23,15 +22,19 @@ def should_skip_directory(dir_name):
 def is_target_file(filename):
     """
     Determine if the file is a target file for inclusion.
-    Always include .jsx files; include .css files only if include_css_files is True.
+    Always include .jsx and .js files; include .css files only if include_css_files is True.
     """
-    return filename.endswith(".jsx") or (include_css_files and filename.endswith(".css"))
+    return (
+        filename.endswith(".jsx")
+        or filename.endswith(".js")
+        or (include_css_files and filename.endswith(".css"))
+    )
 
 
 def print_directory_structure(directory, output_file, prefix=""):
     """
     Prints the directory structure in a tree-like format to the output file,
-    showing only directories containing target files (.jsx and, optionally, .css)
+    showing only directories containing target files (.jsx, .js, and, optionally, .css)
     and the target files themselves.
     """
     output_file.write(f"# Directory Structure\n\n```\n")
@@ -78,7 +81,7 @@ def append_jsx_files_to_md(directory, output_filename="output.md"):
     """
     Generates an output Markdown file containing:
       1. The directory structure (showing only directories with target files and the target files).
-      2. The source code from all target files (i.e., .jsx files and, if enabled, .css files).
+      2. The source code from all target files (i.e., .jsx, .js and, if enabled, .css files).
 
     This is useful if you want to send the entire repository content to an AI for analysis,
     to ask questions, or to propose code changes.
@@ -102,8 +105,18 @@ def append_jsx_files_to_md(directory, output_filename="output.md"):
                     filepath = os.path.join(root, file)
                     relative_path = os.path.relpath(filepath, directory)
                     outfile.write(f"## {relative_path}\n\n")
-                    # Assuming the source code is either JavaScript or CSS; adjust language if needed.
-                    outfile.write("```typescript\n")
+
+                    # Determine the appropriate language for syntax highlighting
+                    if file.endswith(".css"):
+                        lang = "css"
+                    elif file.endswith(".jsx"):
+                        lang = "jsx"
+                    elif file.endswith(".js"):
+                        lang = "javascript"
+                    else:
+                        lang = ""
+
+                    outfile.write(f"```{lang}\n")
                     with open(filepath, "r", encoding="utf-8") as infile:
                         outfile.write(infile.read())
                     outfile.write("\n```\n\n")

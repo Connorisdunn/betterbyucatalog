@@ -5,16 +5,18 @@ import { departments } from './data/departments';
 import { Dropdown } from './components/Dropdown';
 import { highlightText, searchCourse } from './utils/search';
 import DOMPurify from 'dompurify';
+import FeaturedClass from './components/FeaturedClass';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedSemester, setSelectedSemester] = useState('Winter 2025');
+  const [selectedSemester, setSelectedSemester] = useState('Fall 2025');
   const [pinnedCourses, setPinnedCourses] = useState([]);
   const [isPinnedPanelOpen, setIsPinnedPanelOpen] = useState(true);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   const semesters = [
     { term: 'Fall 2025', type: 'fall' },
@@ -89,7 +91,10 @@ function App() {
   };
 
   const CourseCard = ({ course, isPinned, showPin = true }) => (
-    <div className={`course-card ${isPinned ? 'border-2 border-blue-600' : ''}`}>
+    <div 
+      className={`course-card ${isPinned ? 'border-2 border-blue-600' : ''}`}
+      onClick={() => setSelectedCourse(course)}
+    >
       <div className="card-header">
         <div className="title-section">
           <span className="course-title">
@@ -225,6 +230,11 @@ function App() {
               Link to MyMap
             </button>
           </div>
+
+          <FeaturedClass 
+            selectedCourse={selectedCourse}
+            onClose={() => setSelectedCourse(null)}
+          />
 
           <div className="course-grid">
             {getFilteredAndSortedCourses().map(course => (

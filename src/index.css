@@ -444,3 +444,148 @@ mark {
     display: none;
   }
 }
+
+.featured-class {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.featured-class-placeholder {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+.featured-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.featured-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.difficulty {
+  display: flex;
+  gap: 4px;
+}
+
+.close-button {
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: #f3f4f6;
+}
+
+.featured-content {
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.course-description {
+  margin-bottom: 1rem;
+}
+
+.course-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.sections-table {
+  overflow-x: auto;
+}
+
+.sections-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sections-table th,
+.sections-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sections-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+.sections-table tr:hover {
+  background-color: #f9fafb;
+}
+
+
+.featured-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 2rem;
+}
+
+.title-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.credits-badge {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sections-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.sections-table th,
+.sections-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sections-table th:not(:last-child),
+.sections-table td:not(:last-child) {
+  border-right: 1px solid #e5e7eb;
+}
+
+.sections-table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  text-align: left;
+}
+
+.progress-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-wrapper svg {
+  overflow: visible;
+}
+
+.progress-wrapper circle {
+  transition: stroke-dasharray 0.3s ease;
+}
