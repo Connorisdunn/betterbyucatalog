@@ -8,11 +8,25 @@ import DOMPurify from 'dompurify';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedSemester, setSelectedSemester] = useState("Fall '25");
+  const [selectedSemester, setSelectedSemester] = useState('Winter 2025');
   const [pinnedCourses, setPinnedCourses] = useState([]);
   const [isPinnedPanelOpen, setIsPinnedPanelOpen] = useState(true);
+  const [selectedDepartments, setSelectedDepartments] = useState([]);
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [selectedInterests, setSelectedInterests] = useState([]);
 
-  const semesters = ["Fall '25", "Winter '25", "Fall '26", "Winter '26"];
+  const semesters = [
+    { term: 'Winter 2025', type: 'winter' },
+    { term: 'Spring 2025', type: 'spring' },
+    { term: 'Summer 2025', type: 'summer' },
+    { term: 'Fall 2025', type: 'fall' },
+    { term: 'Winter 2026', type: 'winter' },
+    { term: 'Spring 2026', type: 'spring' },
+    { term: 'Summer 2026', type: 'summer' },
+    { term: 'Fall 2026', type: 'fall' }
+  ];
+  
   const interests = ['Python', 'Calc', 'React', 'Java', 'R', 'HTML', 'JavaScript', 'C++'];
 
   const renderStars = (difficulty) => {
@@ -34,15 +48,42 @@ function App() {
   };
 
   const getFilteredAndSortedCourses = () => {
-    if (!searchTerm) return courses;
-
     return courses
-      .map(course => ({
-        ...course,
-        searchResult: searchCourse(course, searchTerm)
-      }))
-      .filter(course => course.searchResult.match)
-      .sort((a, b) => b.searchResult.score - a.searchResult.score);
+      .filter(course => {
+        // Search term filter
+        const searchResult = searchTerm ? searchCourse(course, searchTerm) : { match: true };
+        if (!searchResult.match) return false;
+  
+        // Semester filter
+        console.log(course.semesters);
+        if (!course.semesters.includes(selectedSemester)) return false;
+  
+        // Department filter
+        if (selectedDepartments.length > 0 && 
+            !selectedDepartments.includes(course.department)) return false;
+  
+        // Days filter
+        if (selectedDays.length > 0 && 
+            !selectedDays.some(day => course.days.includes(day))) return false;
+  
+        // Type filter
+        if (selectedTypes.length > 0 && 
+            !selectedTypes.includes(course.type)) return false;
+  
+        // Interests filter
+        if (selectedInterests.length > 0 && 
+            !course.interests.some(interest => selectedInterests.includes(interest))) return false;
+  
+        return true;
+      })
+      .sort((a, b) => {
+        if (searchTerm) {
+          const scoreA = searchCourse(a, searchTerm).score;
+          const scoreB = searchCourse(b, searchTerm).score;
+          return scoreB - scoreA;
+        }
+        return a.code.localeCompare(b.code);
+      });
   };
 
   const renderHighlightedText = (text) => {
@@ -89,29 +130,34 @@ function App() {
 
       <div className={`container ${isPinnedPanelOpen ? 'panel-open' : 'panel-closed'}`}>
         <div className="filters">
+        <div className="filters-header">
           <h2 className="filters-title">Filters</h2>
-
-          <div className="filter-section">
-            <h3>Sections Offered</h3>
-            <div className="semester-filters">
-              {semesters.map(semester => (
-                <button
-                  key={semester}
-                  className={`semester-pill ${selectedSemester === semester ? 'active' : ''}`}
-                  onClick={() => setSelectedSemester(semester)}
-                >
-                  {semester}
-                </button>
-              ))}
-            </div>
+          <div className="course-count text-sm text-gray-600">
+            Displaying {getFilteredAndSortedCourses().length} of {courses.length} courses
           </div>
+        </div>
+
+        <div className="filter-section">
+          <h3>Semesters</h3>
+          <div className="semester-filters">
+            {semesters.map(({ term, type }) => (
+              <button
+                key={term}
+                className={`semester-pill ${type} ${selectedSemester === term ? 'active' : ''}`}
+                onClick={() => setSelectedSemester(term)}
+              >
+                {term}
+              </button>
+            ))}
+          </div>
+        </div>
 
           <div className="filter-section">
-            <Dropdown
-              title="Department"
-              options={departments}
-              onChange={(selected) => console.log('Selected departments:', selected)}
-            />
+          <Dropdown
+            title="Department"
+            options={departments}
+            onChange={setSelectedDepartments}
+          />
           </div>
 
           <div className="filter-section">
@@ -120,7 +166,18 @@ function App() {
               <div className="days-boxes">
                 {['M', 'T', 'W', 'TH', 'F'].map(day => (
                   <div key={day} className="day-item">
-                    <input type="checkbox" id={`day-${day}`} />
+                    <input 
+                      type="checkbox"
+                      id={`day-${day}`}
+                      checked={selectedDays.includes(day)}
+                      onChange={(e) => {
+                        setSelectedDays(prev => 
+                          e.target.checked 
+                            ? [...prev, day]
+                            : prev.filter(d => d !== day)
+                        );
+                      }}
+                    />
                     <label className="day-label" htmlFor={`day-${day}`}>{day}</label>
                   </div>
                 ))}
@@ -133,18 +190,28 @@ function App() {
             <div className="checkbox-group">
               {['Online', 'In-Person', 'Hybrid'].map(type => (
                 <label key={type} className="checkbox-label">
-                  <input type="checkbox" /> {type}
+                  <input 
+                    type="checkbox"
+                    checked={selectedTypes.includes(type)}
+                    onChange={(e) => {
+                      setSelectedTypes(prev => 
+                        e.target.checked 
+                          ? [...prev, type]
+                          : prev.filter(t => t !== type)
+                      );
+                    }}
+                  /> {type}
                 </label>
               ))}
             </div>
           </div>
 
           <div className="filter-section">
-            <Dropdown
-              title="Interests"
-              options={interests}
-              onChange={(selected) => console.log('Selected interests:', selected)}
-            />
+          <Dropdown
+            title="Interests"
+            options={interests}
+            onChange={setSelectedInterests}
+          />
           </div>
         </div>
 

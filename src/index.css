@@ -136,6 +136,20 @@ body {
   gap: 16px;
 }
 
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.course-count {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
 .filters-title {
   color: var(--byu-blue);
   margin-bottom: 24px;
@@ -268,21 +282,49 @@ body {
 .semester-pill {
   padding: 8px 16px;
   border-radius: 20px;
-  border: 1px solid var(--byu-blue);
   cursor: pointer;
-  background: white;
   white-space: nowrap;
   flex: 0 1 auto;
   transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #374151;
 }
 
 .semester-pill:hover {
-  background: #f5f5f5;
+  background: #f9fafb;
 }
 
+/* Season-specific styles */
+.semester-pill.winter {
+  border-color: #e5e7eb;
+  background-color: #f3f4f6;
+}
+
+.semester-pill.spring {
+  border-color: #e5e7eb;
+  background-color: #f3f6f4;
+}
+
+.semester-pill.summer {
+  border-color: #e5e7eb;
+  background-color: #f6f4f1;
+}
+
+.semester-pill.fall {
+  border-color: #e5e7eb;
+  background-color: #f6f4f3;
+}
+
+/* Active states */
 .semester-pill.active {
-  background: var(--byu-blue);
+  background-color: #1e40af;
+  border-color: #1e40af;
   color: white;
+}
+
+.semester-pill:hover:not(.active) {
+  border-color: #d1d5db;
 }
 
 .course-grid {
