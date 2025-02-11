@@ -6,6 +6,22 @@ A React-based course catalog application for BYU courses. This project allows us
 
 ---
 
+## TODO
+
+- [ ] Make the Pinned courses clickable so you can retrieve them easily to the Featured Class section
+- [ ] Move the "Displaying x of y" text to under the Filters title, change it to "X classes match your filters. (The other Y are hidden)"
+- [ ] Make the featured class card have a max height and scroll internally
+- [ ] Have the featured class only show sections from the selected semester
+- [ ] Make sure there is only one scroll bar (for the classes). Two (for the whole site) are annoying.
+- [ ] Whenever you click on a class have it open the featured section.
+- [ ] Add text to the featured class when it's closed: (Click here to open), when it's open: (Click here to minimize)
+- [ ] Show somewhere what the stars mean (on mouse hover?)
+- [ ] Make the (0 selected) on filters show under the dropdown, not on the dropdown
+- [ ] Fix online filter (it should search the sections, doesn't seem to be working)
+- [ ] Show more on a class card?
+- [ ] Include major requirements?
+- [ ] What else...
+
 ## Getting Started
 
 ### Prerequisites
