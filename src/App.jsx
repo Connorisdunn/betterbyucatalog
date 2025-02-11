@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaStar, FaExternalLinkAlt, FaThumbtack, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { courses } from './data/courses';
 import { departments } from './data/departments';
+import { interests } from './data/interests';
 import { Dropdown } from './components/Dropdown';
 import { highlightText, searchCourse } from './utils/search';
 import DOMPurify from 'dompurify';
@@ -19,14 +20,12 @@ function App() {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const semesters = [
+    { term: 'Spring 2025', type: 'spring' },
+    { term: 'Summer 2025', type: 'spring' },
     { term: 'Fall 2025', type: 'fall' },
     { term: 'Winter 2026', type: 'winter' },
-    { term: 'Spring 2026', type: 'spring' },
-    { term: 'Fall 2026', type: 'fall' }
   ];
   
-  const interests = ['Python', 'Calc', 'React', 'Java', 'R', 'HTML', 'JavaScript', 'C++'];
-
   const renderStars = (difficulty) => {
     return [...Array(difficulty)].map((_, index) => (
       <FaStar key={index} />
