@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { FaStar, FaExternalLinkAlt, FaThumbtack, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { courses } from './data/courses';
 import { departments } from './data/departments';
@@ -7,6 +7,9 @@ import { Dropdown } from './components/Dropdown';
 import { highlightText, searchCourse } from './utils/search';
 import DOMPurify from 'dompurify';
 import FeaturedClass from './components/FeaturedClass';
+import { FixedSizeList as List } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,17 +35,53 @@ function App() {
     ));
   };
 
-  const togglePin = (course) => {
+  const togglePin = useCallback((course) => {
     setPinnedCourses(prev => 
       prev.some(c => c.id === course.id)
         ? prev.filter(c => c.id !== course.id)
         : [...prev, course]
     );
-    // Open the panel when a course is pinned
-    if (!isPinnedPanelOpen) {
-      setIsPinnedPanelOpen(true);
-    }
+    if (!isPinnedPanelOpen) setIsPinnedPanelOpen(true);
+  }, [isPinnedPanelOpen]);
+
+  const renderHighlightedText = (text) => {
+    if (!searchTerm) return text;
+    const highlighted = highlightText(text, searchTerm);
+    return <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(highlighted) }} />;
   };
+  
+  const CourseCard = React.memo(({ course, isPinned, showPin = true, togglePin }) => (
+    <div 
+      className={`course-card ${isPinned ? 'border-2 border-blue-600' : ''}`}
+      onClick={() => setSelectedCourse(course)}
+    >  
+      <div className="card-header">
+        <div className="title-section">
+          <span className="course-title">
+            {renderHighlightedText(course.code)}
+          </span>
+          <span className="stars">
+            {renderStars(course.difficulty)}
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="credit-hours">{course.credits} Credits</span>
+          {showPin && (
+            <button 
+              onClick={() => togglePin(course)}
+              className={`pin-button ${isPinned ? 'text-blue-600' : 'text-gray-400'}`}
+              title={isPinned ? 'Unpin course' : 'Pin course'}
+            >
+              <FaThumbtack />
+            </button>
+          )}
+        </div>
+      </div>
+      <p className="description">
+        {renderHighlightedText(course.description)}
+      </p>
+    </div>
+  ));
 
   const getFilteredAndSortedCourses = () => {
     return courses
@@ -52,7 +91,6 @@ function App() {
         if (!searchResult.match) return false;
   
         // Semester filter
-        console.log(course.semesters);
         if (!course.semesters.includes(selectedSemester)) return false;
   
         // Department filter
@@ -83,44 +121,14 @@ function App() {
       });
   };
 
-  const renderHighlightedText = (text) => {
-    if (!searchTerm) return text;
-    const highlighted = highlightText(text, searchTerm);
-    return <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(highlighted) }} />;
-  };
-
-  const CourseCard = ({ course, isPinned, showPin = true }) => (
-    <div 
-      className={`course-card ${isPinned ? 'border-2 border-blue-600' : ''}`}
-      onClick={() => setSelectedCourse(course)}
-    >
-      <div className="card-header">
-        <div className="title-section">
-          <span className="course-title">
-            {renderHighlightedText(course.code)}
-          </span>
-          <span className="stars">
-            {renderStars(course.difficulty)}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="credit-hours">{course.credits} Credits</span>
-          {showPin && (
-            <button 
-              onClick={() => togglePin(course)}
-              className={`pin-button ${isPinned ? 'text-blue-600' : 'text-gray-400'}`}
-              title={isPinned ? 'Unpin course' : 'Pin course'}
-            >
-              <FaThumbtack />
-            </button>
-          )}
-        </div>
-      </div>
-      <p className="description">
-        {renderHighlightedText(course.description)}
-      </p>
-    </div>
-  );
+  const filteredCourses = useMemo(() => getFilteredAndSortedCourses(), [
+    searchTerm, 
+    selectedSemester, 
+    selectedDepartments, 
+    selectedDays, 
+    selectedTypes, 
+    selectedInterests
+  ]);
 
   return (
     <>
@@ -235,15 +243,52 @@ function App() {
             onClose={() => setSelectedCourse(null)}
           />
 
-          <div className="course-grid">
-            {getFilteredAndSortedCourses().map(course => (
-              <CourseCard 
-                key={course.id} 
-                course={course}
-                isPinned={pinnedCourses.some(c => c.id === course.id)}
-              />
-            ))}
-          </div>
+        <div className="course-grid">
+          <AutoSizer>
+            {({ height, width }) => {
+              const CARD_MIN_WIDTH = 300;
+              const columnCount = Math.max(1, Math.floor(width / CARD_MIN_WIDTH));
+              const itemWidth = width / columnCount;
+              const rowHeight = 200; // Match your card height
+
+              return (
+                <List
+                  height={height}
+                  width={width}
+                  itemCount={Math.ceil(filteredCourses.length / columnCount)}
+                  itemSize={rowHeight}
+                  overscanCount={3}
+                >
+                  {({ index, style }) => {
+                    const items = [];
+                    const fromIndex = index * columnCount;
+                    const toIndex = Math.min(fromIndex + columnCount, filteredCourses.length);
+                    
+                    for (let i = fromIndex; i < toIndex; i++) {
+                      items.push(
+                        <div key={filteredCourses[i].id} style={{ width: itemWidth }}>
+                          <CourseCard
+                            course={filteredCourses[i]}
+                            isPinned={pinnedCourses.some(c => c.id === filteredCourses[i].id)}
+                            showPin={true}
+                            togglePin={togglePin}
+                            setSelectedCourse={setSelectedCourse}
+                          />
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <div style={style} className="flex justify-start gap-4 px-4">
+                        {items}
+                      </div>
+                    );
+                  }}
+                </List>
+              );
+            }}
+          </AutoSizer>
+        </div>
         </div>
 
         <div className={`pinned-courses-wrapper ${isPinnedPanelOpen ? 'open' : 'closed'}`}>
