@@ -1,13 +1,12 @@
+// components/common/Dropdown.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-export function Dropdown({ title, options, onChange }) {
+export function Dropdown({ title, options, selected, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [direction, setDirection] = useState('down'); // 'down' or 'up'
-  const [selected, setSelected] = useState([]);
+  const [direction, setDirection] = useState('down');
   const dropdownRef = useRef(null);
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -18,25 +17,20 @@ export function Dropdown({ title, options, onChange }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Check available space when opening the dropdown
   useEffect(() => {
     if (isOpen && dropdownRef.current) {
       const rect = dropdownRef.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - rect.bottom;
-      const dropdownHeight = 200; // Assume a max height for dropdown-content
-      if (spaceBelow < dropdownHeight) {
-        setDirection('up');
-      } else {
-        setDirection('down');
-      }
+      const dropdownHeight = 200;
+      setDirection(spaceBelow < dropdownHeight ? 'up' : 'down');
     }
   }, [isOpen]);
 
   const toggleOption = (option) => {
-    const newSelected = selected.includes(option)
-      ? selected.filter(item => item !== option)
-      : [...selected, option];
-    setSelected(newSelected);
+    const value = option.code || option;
+    const newSelected = selected.includes(value)
+      ? selected.filter(item => item !== value)
+      : [...selected, value];
     onChange(newSelected);
   };
 
@@ -60,7 +54,7 @@ export function Dropdown({ title, options, onChange }) {
               <input
                 type="checkbox"
                 checked={selected.includes(option.code || option)}
-                onChange={() => toggleOption(option.code || option)}
+                onChange={() => toggleOption(option)}
               />
               {option.name || option}
             </label>

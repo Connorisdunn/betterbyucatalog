@@ -181,14 +181,6 @@ body {
   cursor: pointer;
 }
 
-.dropdown-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
 .dropdown-content {
   position: absolute;
   top: 100%;
@@ -207,9 +199,9 @@ body {
 
 .days-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
 }
 
 .days-boxes {
@@ -227,6 +219,7 @@ body {
 .day-label {
   font-size: 0.8rem;
   color: #666;
+  margin-top: 4px;
 }
 
 .dropdown-header {
@@ -295,27 +288,6 @@ body {
   background: #f9fafb;
 }
 
-/* Season-specific styles */
-.semester-pill.winter {
-  border-color: #e5e7eb;
-  background-color: #f3f4f6;
-}
-
-.semester-pill.spring {
-  border-color: #e5e7eb;
-  background-color: #f3f6f4;
-}
-
-.semester-pill.summer {
-  border-color: #e5e7eb;
-  background-color: #f6f4f1;
-}
-
-.semester-pill.fall {
-  border-color: #e5e7eb;
-  background-color: #f6f4f3;
-}
-
 /* Active states */
 .semester-pill.active {
   background-color: #1e40af;
@@ -359,6 +331,16 @@ body {
   margin-bottom: 10px;
 }
 
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.course-code {
+  font-weight: 600;
+}
+
 .title-section {
   display: flex;
   align-items: center;
@@ -366,9 +348,11 @@ body {
 }
 
 .course-title {
-  font-size: 1.2rem;
-  color: var(--byu-blue);
-  font-weight: bold;
+  font-size: 1.1rem;
+  color: #374151;
+  margin: 0;
+  margin-bottom: 0.5em;
+  padding: 0;
 }
 
 .credit-hours {
@@ -387,7 +371,9 @@ body {
 }
 
 .description {
-  color: #666;
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
@@ -478,12 +464,6 @@ mark {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-}
-
-.featured-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .difficulty {

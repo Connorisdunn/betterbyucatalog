@@ -1,50 +1,9 @@
+// components/courses/FeaturedClass.jsx
 import React, { useState } from 'react';
 import { FaStar, FaTimes } from 'react-icons/fa';
+import { CircularProgress } from '../common/CircularProgress';
 
-// New circular progress component
-const CircularProgress = ({ current, total }) => {
-  const percentage = ((total - current) / total) * 100;
-  const strokeDasharray = `${percentage} ${100 - percentage}`;
-  const color = percentage > 75 ? '#ef4444' : percentage > 50 ? '#f59e0b' : '#22c55e';
-
-  return (
-    <div className="progress-wrapper" title={`${current}/${total} seats remaining`}>
-      <svg width="24" height="24" viewBox="0 0 24 24">
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-          fill="none"
-          stroke="#e5e7eb"
-          strokeWidth="2"
-        />
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-          fill="none"
-          stroke={color}
-          strokeWidth="2"
-          strokeDasharray={strokeDasharray}
-          strokeDashoffset="25"
-          transform="rotate(-90 12 12)"
-        />
-        <text
-          x="12"
-          y="12"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="8"
-          fill="#4b5563"
-        >
-          {current}
-        </text>
-      </svg>
-    </div>
-  );
-};
-
-function FeaturedClass({ selectedCourse, onClose }) {
+export function FeaturedClass({ selectedCourse, onClose }) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   if (!selectedCourse) {
@@ -129,5 +88,3 @@ function FeaturedClass({ selectedCourse, onClose }) {
     </div>
   );
 }
-
-export default FeaturedClass;

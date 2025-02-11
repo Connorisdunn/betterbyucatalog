@@ -1,18 +1,35 @@
-// src/utils/search.js
+// utils/search.js
 export function highlightText(text, searchTerm) {
-    // A simple implementation that wraps matching text in a <mark> tag
-    const regex = new RegExp(`(${searchTerm})`, 'gi');
-    return text.replace(regex, '<mark>$1</mark>');
-  }
+  if (!searchTerm) return text;
+  const regex = new RegExp(`(${searchTerm})`, 'gi');
+  return text.replace(regex, '<mark>$1</mark>');
+}
+
+export function searchCourse(course, searchTerm) {
+  const searchLower = searchTerm.toLowerCase();
+  const fields = [
+    course.code,
+    course.name,
+    course.description,
+    course.department
+  ];
   
-  export function searchCourse(course, searchTerm) {
-    // Check if the search term is present in the course code or description
-    const lowerTerm = searchTerm.toLowerCase();
-    const inCode = course.code.toLowerCase().includes(lowerTerm);
-    const inDescription = course.description.toLowerCase().includes(lowerTerm);
-    return {
-      match: inCode || inDescription,
-      score: (inCode ? 1 : 0) + (inDescription ? 1 : 0)
-    };
-  }
-  
+  let maxScore = 0;
+  let hasMatch = false;
+
+  fields.forEach(field => {
+    if (!field) return;
+    const fieldLower = field.toLowerCase();
+    if (fieldLower.includes(searchLower)) {
+      hasMatch = true;
+      const score = fieldLower === searchLower ? 3 :
+                    fieldLower.startsWith(searchLower) ? 2 : 1;
+      maxScore = Math.max(maxScore, score);
+    }
+  });
+
+  return {
+    match: hasMatch,
+    score: maxScore
+  };
+}
