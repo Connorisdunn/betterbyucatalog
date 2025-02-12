@@ -1,10 +1,15 @@
-// components/courses/FeaturedClass.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaStar, FaTimes } from 'react-icons/fa';
 import { CircularProgress } from '../common/CircularProgress';
 
 export function FeaturedClass({ selectedCourse, onClose }) {
   const [isExpanded, setIsExpanded] = useState(true);
+
+  useEffect(() => {
+    if (selectedCourse) {
+      setIsExpanded(true);
+    }
+  }, [selectedCourse]);
 
   if (!selectedCourse) {
     return (
@@ -36,13 +41,16 @@ export function FeaturedClass({ selectedCourse, onClose }) {
           <div className="credits-badge">
             {selectedCourse.credits} Credits
           </div>
+          <span className="toggle-text">
+            {isExpanded ? 'Click to collapse' : 'Click to expand'}
+          </span>
+          <button className="close-button" onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}>
+            <FaTimes />
+          </button>
         </div>
-        <button className="close-button" onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}>
-          <FaTimes />
-        </button>
       </div>
       {isExpanded && (
         <div className="featured-content">

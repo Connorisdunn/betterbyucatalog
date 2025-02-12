@@ -22,9 +22,6 @@ A React-based course catalog application for BYU courses. This project allows us
 - [ ] Make the featured class card have a max height and scroll internally
 - [ ] Have the featured class only show sections from the selected semester
 - [ ] Make sure there is only one scroll bar (for the classes). Two (for the whole site) are annoying.
-- [ ] Whenever you click on a class have it open the featured section.
-- [ ] Add text to the featured class when it's closed: (Click here to open), when it's open: (Click here to minimize)
-- [ ] Show somewhere what the stars mean (on mouse hover?)
 - [ ] Show more on a class card?
 - [ ] Include major requirements?
 - [ ] What else...

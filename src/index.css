@@ -337,6 +337,20 @@ body {
   gap: 0.5rem;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto; /* This will push it to the right */
+}
+
+.toggle-text {
+  font-size: 0.9rem;
+  color: #6b7280; /* A standard gray color */
+  cursor: pointer;
+  margin: 0 2rem; /* Added horizontal margin to center it */
+}
+
 .course-code {
   font-weight: 600;
 }
@@ -527,13 +541,13 @@ mark {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-right: 2rem;
+  padding-right: 1rem; /* Reduced from 2rem to balance the spacing */
 }
 
 .title-content {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem; /* Increased from 1rem to create more space between code and stars */
 }
 
 .credits-badge {
