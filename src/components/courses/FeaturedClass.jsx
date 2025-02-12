@@ -61,7 +61,7 @@ export function FeaturedClass({ selectedCourse, onClose }) {
                   <th>Time</th>
                   <th>Professor</th>
                   <th>Location</th>
-                  <th>Seats</th>
+                  <th>Seats Left</th>
                 </tr>
               </thead>
               <tbody>

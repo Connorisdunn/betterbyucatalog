@@ -13,9 +13,13 @@ export const CourseCard = React.memo(({
     onSelect 
   }) => {
     const renderStars = (difficulty) => {
-      return [...Array(difficulty)].map((_, index) => (
-        <FaStar key={index} />
-      ));
+      return (
+        <span title="Course difficulty" className="stars-wrapper inline-flex">
+          {[...Array(difficulty)].map((_, index) => (
+            <FaStar key={index} />
+          ))}
+        </span>
+      );
     };
     
     const renderHighlightedText = (text) => {
