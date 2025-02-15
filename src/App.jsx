@@ -36,6 +36,8 @@ function App() {
           <FeaturedClass 
             selectedCourse={selectedCourse}
             onClose={() => setSelectedCourse(null)}
+            togglePin={togglePin}
+            pinnedCourses={pinnedCourses}
           />
           <CourseList 
             courses={filteredCourses}
@@ -50,6 +52,7 @@ function App() {
           isOpen={isPinnedPanelOpen}
           onToggle={setIsPinnedPanelOpen}
           togglePin={togglePin}
+          onSelect={setSelectedCourse}
         />
       </div>
     </>

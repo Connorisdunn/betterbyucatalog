@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FaStar, FaTimes } from 'react-icons/fa';
+import { FaStar, FaTimes, FaThumbtack } from 'react-icons/fa';
 import { CircularProgress } from '../common/CircularProgress';
 
-export function FeaturedClass({ selectedCourse, onClose }) {
+export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourses }) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
@@ -18,6 +18,8 @@ export function FeaturedClass({ selectedCourse, onClose }) {
       </div>
     );
   }
+
+  const isPinned = pinnedCourses?.some(course => course.id === selectedCourse.id);
 
   const renderTimeSlot = (timeSlot) => {
     return `${timeSlot.days.join('/')} ${timeSlot.startTime}-${timeSlot.endTime}`;
@@ -44,10 +46,25 @@ export function FeaturedClass({ selectedCourse, onClose }) {
           <span className="toggle-text">
             {isExpanded ? 'Click to collapse' : 'Click to expand'}
           </span>
-          <button className="close-button" onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}>
+          {/* Pin/Unpin Button */}
+          <button 
+            className="pin-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePin(selectedCourse);
+            }}
+            title={isPinned ? 'Unpin course' : 'Pin course'}
+          >
+            <FaThumbtack className={isPinned ? 'text-blue-600' : 'text-gray-400'} />
+          </button>
+          <button 
+            className="close-button" 
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            title="Close details"
+          >
             <FaTimes />
           </button>
         </div>

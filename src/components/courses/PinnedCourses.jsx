@@ -1,9 +1,8 @@
-// components/courses/PinnedCourses.jsx
 import React from 'react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { CourseCard } from './CourseCard';
 
-export function PinnedCourses({ courses, isOpen, onToggle, togglePin }) {
+export function PinnedCourses({ courses, isOpen, onToggle, togglePin, onSelect }) {
   return (
     <div className={`pinned-courses-wrapper ${isOpen ? 'open' : 'closed'}`}>
       <button 
@@ -31,6 +30,7 @@ export function PinnedCourses({ courses, isOpen, onToggle, togglePin }) {
                 isPinned={true}
                 showPin={false}
                 togglePin={togglePin}
+                onSelect={onSelect}  // Pass onSelect to enable clickable course details
               />
             ))
           )}
