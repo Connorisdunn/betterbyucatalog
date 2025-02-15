@@ -16,20 +16,23 @@ function App() {
   return (
     <>
       <header className="header">
-        <h1>BYU Course Catalog</h1>
+        <h1 className="logo">BYU Course Catalog</h1>
+        <div className="header-search">
+          <SearchBar
+            value={filters.searchTerm}
+            onChange={(value) => setFilters({ ...filters, searchTerm: value })}
+          />
+        </div>
+        <div className="header-spacer"></div>
       </header>
       <div className={`container ${isPinnedPanelOpen ? 'panel-open' : 'panel-closed'}`}>
-      <FilterPanel 
-        filters={filters} 
-        onFilterChange={setFilters}
-        filteredCount={filteredCourses.length}
-        totalCount={courses.length}
-      />
+        <FilterPanel 
+          filters={filters} 
+          onFilterChange={setFilters}
+          filteredCount={filteredCourses.length}
+          totalCount={courses.length}
+        />
         <main className="main-content">
-          <SearchBar 
-            value={filters.searchTerm} 
-            onChange={(value) => setFilters({...filters, searchTerm: value})} 
-          />
           <FeaturedClass 
             selectedCourse={selectedCourse}
             onClose={() => setSelectedCourse(null)}

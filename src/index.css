@@ -24,10 +24,13 @@ body {
 }
 
 .header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
   background: var(--byu-blue);
   color: white;
-  padding: 20px;
-  text-align: center;
+  padding: 0 20px;
+  height: 80px;
   margin-bottom: 20px;
 }
 
@@ -50,6 +53,11 @@ body {
 
 .container.panel-closed {
   grid-template-columns: 300px 1fr 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .filters {
@@ -238,8 +246,9 @@ body {
 
 .search-container {
   display: flex;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
 .search-bar {
@@ -335,6 +344,31 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.header-search {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.header-search .search-container {
+  width: 100%;
+  max-width: 850px;
+}
+
+.header-spacer {
+  width: 1rem;
+}
+
+.header .search-container {
+  margin-bottom: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .header-controls {
