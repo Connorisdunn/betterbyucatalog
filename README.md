@@ -25,6 +25,7 @@ A React-based course catalog application for BYU courses. This project allows us
 - [ ] Show more on a class card?
 - [ ] Include major requirements?
 - [ ] What else...
+- [X] Change Header, bump search bar and mymap up to header
 
 ## Getting Started
 
