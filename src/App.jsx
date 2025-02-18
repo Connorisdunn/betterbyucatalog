@@ -38,6 +38,7 @@ function App() {
             onClose={() => setSelectedCourse(null)}
             togglePin={togglePin}
             pinnedCourses={pinnedCourses}
+            selectedSemester={filters.semester}
           />
           <CourseList 
             courses={filteredCourses}

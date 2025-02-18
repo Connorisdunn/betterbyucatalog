@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaStar, FaTimes, FaThumbtack } from 'react-icons/fa';
 import { CircularProgress } from '../common/CircularProgress';
 
-export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourses }) {
+export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourses, selectedSemester }) {
   const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
@@ -23,6 +23,13 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
 
   const renderTimeSlot = (timeSlot) => {
     return `${timeSlot.days.join('/')} ${timeSlot.startTime}-${timeSlot.endTime}`;
+  };
+
+  const getFilteredSections = () => {
+    if (!selectedSemester) return Object.entries(selectedCourse.Sections_available);
+    
+    return Object.entries(selectedCourse.Sections_available)
+      .filter(([_, section]) => section.Semester === selectedSemester);
   };
 
   return (
@@ -90,7 +97,7 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
                 </tr>
               </thead>
               <tbody>
-                {Object.entries(selectedCourse.Sections_available).map(([sectionId, section]) => (
+                {getFilteredSections().map(([sectionId, section]) => (
                   <tr key={sectionId}>
                     <td>{sectionId}</td>
                     <td>{section.Semester}</td>
@@ -107,6 +114,11 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
                 ))}
               </tbody>
             </table>
+            {getFilteredSections().length === 0 && (
+              <p className="text-gray-500 text-center py-4">
+                No sections available for {selectedSemester}
+              </p>
+            )}
           </div>
         </div>
       )}
