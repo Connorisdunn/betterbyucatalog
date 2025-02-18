@@ -8,6 +8,10 @@ A React-based course catalog application for BYU courses. This project allows us
 
 ## TODO
 
+- [ ] The mobile page and the layout for smaller monitors need to be adjusted.
+- [ ] Make the filter section narrower.
+- [ ] Enable filtering by clicking on the class types.
+- [ ] Add a link to MyMap.
 - [x] Make the Pinned courses clickable so you can retrieve them easily to the Featured Class section
 - [x] Make the department and interests dropdowns clickable
 - [x] Make the (0 selected) on filters show under the dropdown, not on the dropdown
