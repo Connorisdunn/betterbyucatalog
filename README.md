@@ -9,7 +9,7 @@ A React-based course catalog application for BYU courses. This project allows us
 ## TODO
 
 - [X] Make the Pinned courses clickable so you can retrieve them easily to the Featured Class section
-- [ ] Make the department and interests dropdowns clickable
+- [X] Make the department and interests dropdowns clickable
 - [ ] Make the (0 selected) on filters show under the dropdown, not on the dropdown
 - [X] Change Semester selection to a dropdown? Or do we like it like this?
 - [ ] Make the filters bar draggable - bigger and smaller or minimized like the Pinned sidebar
