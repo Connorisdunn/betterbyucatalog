@@ -633,3 +633,12 @@ mark {
   margin-top: 4px;
   padding-left: 4px;
 }
+.filters-title {
+  margin: 0;
+  padding: 0;
+}
+
+.filters-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

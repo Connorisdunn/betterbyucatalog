@@ -13,12 +13,12 @@ A React-based course catalog application for BYU courses. This project allows us
 - [x] Make the (0 selected) on filters show under the dropdown, not on the dropdown
 - [x] Change Semester selection to a dropdown? Or do we like it like this?
 - [ ] Make the filters bar draggable - bigger and smaller or minimized like the Pinned sidebar
-- [ ] Improve the page layout - too much vertical gap between classes, etc.
+- [x] Improve the page layout - too much vertical gap between classes, etc.
 - [ ] Make the Featured Card look nicer (more gray desc. text, icons instead of text, etc)
 - [ ] Refine the courses.js data (e.g. we don't want "days", "type", or "Semesters" attributes, those depend on the sections not on the course itself)
 - [ ] Fix online filter (once the courses.js is fixed, this should search through the sections)
 - [ ] Fix the days taught filter (same deal, we have to look through the sections of the classes)
-- [ ] Move the "Displaying x of y" text to under the Filters title, change it to "X classes match your filters. (The other Y are hidden)"
+- [x] Move the "Displaying x of y" text to under the Filters title, change it to "X classes match your filters. (The other Y are hidden)"
 - [ ] Make the featured class card have a max height and scroll internally
 - [ ] Have the featured class only show sections from the selected semester
 - [ ] Make sure there is only one scroll bar (for the classes). Two (for the whole site) are annoying.

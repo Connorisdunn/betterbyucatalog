@@ -8,11 +8,12 @@ import { SemesterFilter } from './SemesterFilter';
 export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount }) {
   return (
     <div className="filters">
-      <div className="filters-header">
-        <h2 className="filters-title">Filters</h2>
-        <div className="course-count text-sm text-gray-600">
-          Displaying {filteredCount} of {totalCount} courses
-        </div>
+      <div className="filters-header mb-0">
+        <h2 className="filters-title m-0 p-0">Filters</h2>
+      </div>
+      
+      <div className="course-count text-sm text-gray-600 mb-2 ml-0">
+        {filteredCount} classes match your filters
       </div>
 
       <SemesterFilter 
