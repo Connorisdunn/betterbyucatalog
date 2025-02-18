@@ -40,8 +40,12 @@ export function Dropdown({ title, options, selected, onChange }) {
         className="dropdown-header"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span>{title} ({selected.length} selected)</span>
+        <span>{title}</span>
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+      </div>
+
+      <div className="selected-count text-sm text-gray-600">
+        {selected.length} selected
       </div>
       
       {isOpen && (

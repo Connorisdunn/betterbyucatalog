@@ -628,3 +628,8 @@ mark {
 .progress-wrapper circle {
   transition: stroke-dasharray 0.3s ease;
 }
+
+.selected-count {
+  margin-top: 4px;
+  padding-left: 4px;
+}
