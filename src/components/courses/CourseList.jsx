@@ -18,7 +18,7 @@ export function CourseList({
           const CARD_MIN_WIDTH = 300;
           const columnCount = Math.max(1, Math.floor(width / CARD_MIN_WIDTH));
           const itemWidth = width / columnCount;
-          const rowHeight = 200;
+          const rowHeight = 180;
 
           return (
             <List
@@ -49,7 +49,7 @@ export function CourseList({
                 }
                 
                 return (
-                  <div style={style} className="flex justify-start gap-4 px-4">
+                  <div style={style} className="flex justify-start gap-6 px-4">
                     {items}
                   </div>
                 );
