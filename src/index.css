@@ -321,7 +321,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* Crucial for proper scrolling */
+  height: calc(100vh); /* Adjust based on your header height */
+  min-height: 500px; /* Minimum height for smaller screens */
 }
 
 .course-grid {
@@ -329,6 +330,8 @@ body {
   overflow-y: auto;
   padding: 1rem;
   contain: strict;
+  height: 100%; /* This is crucial */
+  min-height: 500px; /* This is important for flex containers */
   position: relative;
   overflow: hidden;
 }
@@ -534,23 +537,58 @@ mark {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 708px) {
   .container.panel-open,
   .container.panel-closed {
     grid-template-columns: 1fr;
   }
   
-  .filters, .pinned-courses-wrapper {
+  .filters {
     position: static;
     width: 100% !important;
   }
   
+  .pinned-courses-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    z-index: 50;
+    /* Add some padding to account for mobile browser bars */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  .pinned-courses {
+    border-radius: 8px 8px 0 0;
+    /* Remove top sticky positioning since we're fixed to bottom */
+    position: static;
+    /* Add max-height with scrolling for many pinned courses */
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+  
+  /* Add some bottom margin to main content to prevent overlap */
+  .main-content {
+    margin-bottom: calc(40vh + 20px);
+  }
+  
   .pinned-courses-wrapper.closed {
-    display: none;
+    /* Instead of display: none, transform it off-screen */
+    transform: translateY(100%);
+    transition: transform var(--panel-transition);
+  }
+  
+  .pinned-courses-wrapper.open {
+    transform: translateY(0);
   }
   
   .toggle-panel-button {
-    display: none;
+    /* Reposition the toggle button for mobile */
+    display: block;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
