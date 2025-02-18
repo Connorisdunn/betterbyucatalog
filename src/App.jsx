@@ -16,14 +16,17 @@ function App() {
   return (
     <>
       <header className="header">
-        <h1 className="logo">BYU Course Catalog</h1>
-        <div className="header-search">
-          <SearchBar
-            value={filters.searchTerm}
-            onChange={(value) => setFilters({ ...filters, searchTerm: value })}
-          />
+        <div className="header-container">
+          <div className="header-left">
+            <h1 className="logo pb-0">BYU Course Catalog</h1>
+          </div>
+          <div className={'header-search'}>
+            <SearchBar
+              value={filters.searchTerm}
+              onChange={(value) => setFilters({ ...filters, searchTerm: value })}
+            />
+          </div>
         </div>
-        <div className="header-spacer"></div>
       </header>
       <div className={`container ${isPinnedPanelOpen ? 'panel-open' : 'panel-closed'}`}>
         <FilterPanel 

@@ -20,7 +20,7 @@ A React-based course catalog application for BYU courses. This project allows us
 - [ ] Fix the days taught filter (same deal, we have to look through the sections of the classes)
 - [x] Move the "Displaying x of y" text to under the Filters title, change it to "X classes match your filters. (The other Y are hidden)"
 - [ ] Make the featured class card have a max height and scroll internally
-- [ ] Have the featured class only show sections from the selected semester
+- [c] Have the featured class only show sections from the selected semester
 - [ ] Make sure there is only one scroll bar (for the classes). Two (for the whole site) are annoying.
 - [ ] Show more on a class card?
 - [ ] Include major requirements?
