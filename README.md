@@ -8,7 +8,7 @@ A React-based course catalog application for BYU courses. This project allows us
 
 ## TODO
 
-- [ ] The mobile page and the layout for smaller monitors need to be adjusted.
+- [ ] The mobile page and the layout for smaller monitors need to be adjusted(course cards needs to be shown).
 - [ ] Make the filter section narrower.
 - [ ] Enable filtering by clicking on the class types(once the courses.js is fixed, this should search through the sections).
 - [ ] Add a link to MyMap.
