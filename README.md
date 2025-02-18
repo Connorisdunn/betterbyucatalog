@@ -8,9 +8,9 @@ A React-based course catalog application for BYU courses. This project allows us
 
 ## TODO
 
-- [] The mobile page and the layout for smaller monitors need to be adjusted(course cards needs to be shown).
-- [] Make the filter section narrower.
-- [] Enable filtering by clicking on the class types(once the courses.js is fixed, this should search through the sections).
+- [ ] The mobile page and the layout for smaller monitors need to be adjusted(course cards needs to be shown).
+- [ ] Make the filter section narrower.
+- [ ] Enable filtering by clicking on the class types(once the courses.js is fixed, this should search through the sections).
 - [c] Add a link to MyMap.
 - [x] Make the Pinned courses clickable so you can retrieve them easily to the Featured Class section
 - [x] Make the department and interests dropdowns clickable
@@ -18,7 +18,7 @@ A React-based course catalog application for BYU courses. This project allows us
 - [x] Change Semester selection to a dropdown? Or do we like it like this?
 - [x] Improve the page layout - too much vertical gap between classes, etc.
 - [ ] Make the Featured Card look nicer (more gray desc. text, icons instead of text, etc)
-- [] Refine the courses.js data (e.g. we don't want "days", "type", or "Semesters" attributes, those depend on the sections not on the course itself)
+- [ ] Refine the courses.js data (e.g. we don't want "days", "type", or "Semesters" attributes, those depend on the sections not on the course itself)
 - [ ] Fix the days taught filter (same deal, we have to look through the sections of the classes)
 - [x] Move the "Displaying x of y" text to under the Filters title, change it to "X classes match your filters. (The other Y are hidden)"
 - [ ] Make the featured class card have a max height and scroll internally
