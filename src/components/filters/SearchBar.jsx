@@ -1,8 +1,12 @@
-// components/filters/SearchBar.jsx
+// src/components/filters/SearchBar.jsx
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 export function SearchBar({ value, onChange }) {
+  const handleLinkClick = () => {
+    window.open('https://mymap.byu.edu/', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="search-container">
       <input
@@ -12,10 +16,11 @@ export function SearchBar({ value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <button className="mymap-button">
+      <button className="mymap-button" onClick={handleLinkClick}>
         <FaExternalLinkAlt />
         Link to MyMap
       </button>
     </div>
   );
 }
+
