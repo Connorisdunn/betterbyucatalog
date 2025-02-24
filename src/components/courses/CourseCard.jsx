@@ -1,8 +1,9 @@
 // components/courses/CourseCard.jsx
 import React from 'react';
-import { FaStar, FaThumbtack } from 'react-icons/fa';
+import { FaThumbtack } from 'react-icons/fa';
 import DOMPurify from 'dompurify';
 import { highlightText } from '../../utils/search';
+import { DifficultyDial } from '../common/DifficultyDial';
 
 export const CourseCard = React.memo(({ 
     course, 
@@ -12,15 +13,6 @@ export const CourseCard = React.memo(({
     searchTerm,
     onSelect 
   }) => {
-    const renderStars = (difficulty) => {
-      return (
-        <span title="Course difficulty" className="stars-wrapper inline-flex">
-          {[...Array(difficulty)].map((_, index) => (
-            <FaStar key={index} />
-          ))}
-        </span>
-      );
-    };
     
     const renderHighlightedText = (text) => {
       if (!searchTerm) return text;
@@ -38,8 +30,8 @@ export const CourseCard = React.memo(({
             <span className="course-code">
               {renderHighlightedText(course.code)}
             </span>
-            <span className="stars">
-              {renderStars(course.difficulty)}
+            <span className="difficulty-indicator">
+              <DifficultyDial difficulty={course.difficulty} />
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -61,7 +53,7 @@ export const CourseCard = React.memo(({
         <h3 className="course-title">
           {renderHighlightedText(course.name)}
         </h3>
-        <p className="description">
+        <p className="description truncate">
           {renderHighlightedText(course.description)}
         </p>
       </div>

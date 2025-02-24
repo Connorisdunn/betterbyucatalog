@@ -1,16 +1,16 @@
+// components/courses/FeaturedClass.jsx
 import React, { useState, useEffect } from 'react';
-import { FaStar, FaTimes, FaThumbtack } from 'react-icons/fa';
+import { FaTimes, FaThumbtack } from 'react-icons/fa';
 import { CircularProgress } from '../common/CircularProgress';
+import { DifficultyDial } from '../common/DifficultyDial';
 
 export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourses, selectedSemester }) {
   const [isExpanded, setIsExpanded] = useState(true);
-
   useEffect(() => {
     if (selectedCourse) {
       setIsExpanded(true);
     }
   }, [selectedCourse]);
-
   if (!selectedCourse) {
     return (
       <div className="featured-class-placeholder">
@@ -18,20 +18,16 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
       </div>
     );
   }
-
   const isPinned = pinnedCourses?.some(course => course.id === selectedCourse.id);
-
   const renderTimeSlot = (timeSlot) => {
     return `${timeSlot.days.join('/')} ${timeSlot.startTime}-${timeSlot.endTime}`;
   };
-
   const getFilteredSections = () => {
     if (!selectedSemester) return Object.entries(selectedCourse.Sections_available);
     
     return Object.entries(selectedCourse.Sections_available)
       .filter(([_, section]) => section.Semester === selectedSemester);
   };
-
   return (
     <div className={`featured-class ${isExpanded ? 'expanded' : ''}`}>
       <div 
@@ -42,9 +38,7 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
           <div className="title-content">
             <h2>{selectedCourse.code}: {selectedCourse.name}</h2>
             <div className="difficulty">
-              {[...Array(selectedCourse.difficulty)].map((_, i) => (
-                <FaStar key={i} className="text-yellow-400" />
-              ))}
+              <DifficultyDial difficulty={selectedCourse.difficulty} />
             </div>
           </div>
           <div className="credits-badge">
