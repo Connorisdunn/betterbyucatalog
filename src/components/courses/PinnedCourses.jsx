@@ -28,9 +28,9 @@ export function PinnedCourses({ courses, isOpen, onToggle, togglePin, onSelect }
                 key={course.id} 
                 course={course}
                 isPinned={true}
-                showPin={false}
+                showPin={true} // Changed from false to true to show pin button
                 togglePin={togglePin}
-                onSelect={onSelect}  // Pass onSelect to enable clickable course details
+                onSelect={onSelect}
               />
             ))
           )}
