@@ -17,7 +17,11 @@ export function PinnedCourses({ courses, isOpen, onToggle, togglePin, onSelect }
           Pinned Courses
           {courses.length > 0 && <span className="pinned-count">({courses.length})</span>}
         </h2>
-        <div className="pinned-list">
+        <div className="pinned-list" style={{ 
+          maxHeight: 'calc(100vh - 120px)', // Adjust this value based on your header height
+          overflowY: 'auto',
+          paddingRight: '8px' // Add some padding for the scrollbar
+        }}>
           {courses.length === 0 ? (
             <p className="text-gray-500 text-center py-4">
               Pin courses to add them to this list
@@ -28,9 +32,9 @@ export function PinnedCourses({ courses, isOpen, onToggle, togglePin, onSelect }
                 key={course.id} 
                 course={course}
                 isPinned={true}
-                showPin={false}
+                showPin={true} // Changed to true to allow unpinning
                 togglePin={togglePin}
-                onSelect={onSelect}  // Pass onSelect to enable clickable course details
+                onSelect={onSelect}
               />
             ))
           )}

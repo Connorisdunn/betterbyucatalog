@@ -13,6 +13,16 @@ function App() {
   const { pinnedCourses, isPinnedPanelOpen, setIsPinnedPanelOpen, togglePin } = usePinnedCourses();
   const [selectedCourse, setSelectedCourse] = useState(null);
 
+  // Add handleFilterChange function to handle complete reset
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+    // Clear search input if searchTerm is empty
+    if (!newFilters.searchTerm) {
+      const searchInput = document.querySelector('.search-bar');
+      if (searchInput) searchInput.value = '';
+    }
+  };
+
   return (
     <>
       <header className="header">
@@ -31,7 +41,7 @@ function App() {
       <div className={`container ${isPinnedPanelOpen ? 'panel-open' : 'panel-closed'}`}>
         <FilterPanel 
           filters={filters} 
-          onFilterChange={setFilters}
+          onFilterChange={handleFilterChange}
           filteredCount={filteredCourses.length}
           totalCount={courses.length}
         />
