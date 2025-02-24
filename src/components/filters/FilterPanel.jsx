@@ -6,10 +6,34 @@ import { interests } from '../../data/interests';
 import { SemesterFilter } from './SemesterFilter';
 
 export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount }) {
+  // Add reset function
+  const handleReset = () => {
+    onFilterChange({
+      searchTerm: '',
+      semester: '',
+      departments: [],
+      days: [],
+      types: [],
+      interests: []
+    });
+  };
+
   return (
     <div className="filters">
       <div className="filters-header mb-0">
         <h2 className="filters-title m-0 p-0">Filters</h2>
+        {/* Add reset button */}
+        <button 
+          className="reset-button"
+          onClick={handleReset}
+          style={{ 
+            display: filters.searchTerm || filters.semester || 
+                    filters.departments.length || filters.days.length || 
+                    filters.types.length || filters.interests.length ? 'block' : 'none' 
+          }}
+        >
+          Reset All
+        </button>
       </div>
       
       <div className="course-count text-sm text-gray-600 mb-2 ml-0">
