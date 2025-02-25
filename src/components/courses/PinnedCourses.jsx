@@ -1,3 +1,4 @@
+// components/courses/PinnedCourses.jsx
 import React from 'react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { CourseCard } from './CourseCard';
@@ -32,9 +33,10 @@ export function PinnedCourses({ courses, isOpen, onToggle, togglePin, onSelect }
                 key={course.id} 
                 course={course}
                 isPinned={true}
-                showPin={true} // Changed to true to allow unpinning
+                showPin={true} // Allow unpinning
                 togglePin={togglePin}
                 onSelect={onSelect}
+                hideDescription={true} // Hide description in pinned courses
               />
             ))
           )}

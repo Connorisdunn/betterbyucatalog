@@ -11,8 +11,9 @@ export const CourseCard = React.memo(({
     showPin = true, 
     togglePin,
     searchTerm,
-    onSelect 
-  }) => {
+    onSelect,
+    hideDescription = false // Default to false
+}) => {
     
     const renderHighlightedText = (text) => {
       if (!searchTerm) return text;
@@ -53,9 +54,13 @@ export const CourseCard = React.memo(({
         <h3 className="course-title">
           {renderHighlightedText(course.name)}
         </h3>
-        <p className="description truncate">
-          {renderHighlightedText(course.description)}
-        </p>
+
+        {/* Conditionally render description */}
+        {!hideDescription && (
+          <p className="description truncate">
+            {renderHighlightedText(course.description)}
+          </p>
+        )}
       </div>
     );
-  });
+});

@@ -25,7 +25,7 @@ export function CourseList({
           const itemWidth = (availableWidth - (columnCount - 1) * GAP) / columnCount;
           
           // Adjust row height based on content
-          const rowHeight = 200; // Increased for better mobile display
+          const rowHeight = 200;
 
           return (
             <List
@@ -33,7 +33,7 @@ export function CourseList({
               width={width}
               itemCount={Math.ceil(courses.length / columnCount)}
               itemSize={rowHeight}
-              overscanCount={2}
+              overscanCount={3}
             >
               {({ index, style }) => {
                 const items = [];
@@ -57,6 +57,7 @@ export function CourseList({
                         togglePin={togglePin}
                         searchTerm={searchTerm}
                         onSelect={onSelectCourse}
+                        hideDescription={false} // Ensure descriptions are shown in the main section
                       />
                     </div>
                   );

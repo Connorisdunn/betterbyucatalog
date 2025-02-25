@@ -10,8 +10,13 @@ import { courses } from './data/courses';
 
 function App() {
   const { filters, setFilters, filteredCourses } = useCourseFilters();
-  const { pinnedCourses, isPinnedPanelOpen, setIsPinnedPanelOpen, togglePin } = usePinnedCourses();
+  const { pinnedCourses, isPinnedPanelOpen, setIsPinnedPanelOpen, togglePin, setPinnedCourses } = usePinnedCourses();
   const [selectedCourse, setSelectedCourse] = useState(null);
+
+  // Function to clear all pinned courses
+  const clearPinnedCourses = () => {
+    setPinnedCourses([]); // Reset pinned courses array
+  };
 
   // Add handleFilterChange function to handle complete reset
   const handleFilterChange = (newFilters) => {
@@ -67,6 +72,7 @@ function App() {
           onToggle={setIsPinnedPanelOpen}
           togglePin={togglePin}
           onSelect={setSelectedCourse}
+          clearPinnedCourses={clearPinnedCourses} // Pass the clear function here
         />
       </div>
     </>
