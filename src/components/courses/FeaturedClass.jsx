@@ -42,7 +42,7 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
               <DifficultyDial difficulty={selectedCourse.difficulty} />
             </div>
           </div>
-          <div className="credits-badge">
+          <div className="credit-hours">
             {selectedCourse.credits} Credits
           </div>
           <span className="toggle-text">
