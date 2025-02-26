@@ -64,7 +64,6 @@ body {
   padding: 24px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  width: 100%;
 }
 
 .pinned-courses-wrapper {
@@ -322,8 +321,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: calc(100vh); /* Adjust based on your header height */
-  min-height: 500px; /* Minimum height for smaller screens */
+  min-height: 0; /* Crucial for proper scrolling */
 }
 
 .course-grid {
@@ -331,11 +329,8 @@ body {
   overflow-y: auto;
   padding: 1rem;
   contain: strict;
-  /* height: 100%; */
-  /* min-height: 500px; */
   position: relative;
-  max-height: calc(100vh - var(--header-height));
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .course-card {
@@ -343,7 +338,7 @@ body {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
   min-height: 150px;
 }
 
@@ -495,9 +490,7 @@ body {
   -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .pin-button {
@@ -521,11 +514,6 @@ mark {
   border: 2px solid var(--byu-blue);
 }
 
-.course-card:hover {
-  transform: translateY(5px);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-}
-
 @media (max-width: 1400px) {
   .container.panel-open {
     grid-template-columns: 250px 1fr 250px;
@@ -546,81 +534,23 @@ mark {
   }
 }
 
-@media (max-width: 708px) {
+@media (max-width: 1024px) {
   .container.panel-open,
   .container.panel-closed {
     grid-template-columns: 1fr;
   }
   
-  .filters {
+  .filters, .pinned-courses-wrapper {
     position: static;
     width: 100% !important;
-  }
-  
-  .pinned-courses-wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100% !important;
-    z-index: 50;
-    /* Add some padding to account for mobile browser bars */
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  
-  .pinned-courses {
-    border-radius: 8px 8px 0 0;
-    /* Remove top sticky positioning since we're fixed to bottom */
-    position: static;
-    /* Add max-height with scrolling for many pinned courses */
-    max-height: 40vh;
-    overflow-y: auto;
-  }
-
-  /*
-  .clear-pinned-button {
-    padding: 4px 8px;
-    font-size: 0.875rem;
-    color: #f23f3f;
-    background: transparent;
-    border: 1px solid #f23f3f;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .clear-pinned-button:hover {
-    background: #f23f3f;
-    color: white;
-  }
-  */
-
-  .pinned-courses .course-card .description {
-    display: none;
-  }
-
-
-  /* Add some bottom margin to main content to prevent overlap */
-  .main-content {
-    margin-bottom: calc(40vh + 20px);
   }
   
   .pinned-courses-wrapper.closed {
-    /* Instead of display: none, transform it off-screen */
-    transform: translateY(100%);
-    transition: transform var(--panel-transition);
-  }
-  
-  .pinned-courses-wrapper.open {
-    transform: translateY(0);
+    display: none;
   }
   
   .toggle-panel-button {
-    /* Reposition the toggle button for mobile */
-    display: block;
-    top: -16px;
-    left: 50%;
-    transform: translateX(-50%);
+    display: none;
   }
 }
 
@@ -801,8 +731,6 @@ mark {
 .pinned-list {
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(156, 163, 175, 0.5) transparent; /* For Firefox */
-  max-height: calc(100vh - var(--header-height) - 40px); /* Adjust for header and padding */
-  overflow-y: auto; /* Enable scrolling */
 }
 
 .pinned-list::-webkit-scrollbar {
@@ -820,5 +748,11 @@ mark {
 
 .pinned-list::-webkit-scrollbar-thumb:hover {
   background-color: rgba(156, 163, 175, 0.8);
+}
+
+.pinned-courses .credit-hours {
+  font-size: 0.75rem;
+  padding: 3px 3px;
+  white-space: nowrap;
 }
 
