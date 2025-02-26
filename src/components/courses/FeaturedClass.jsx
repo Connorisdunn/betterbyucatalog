@@ -36,7 +36,8 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
       >
         <div className="featured-title">
           <div className="title-content">
-            <h2>{selectedCourse.code}: {selectedCourse.name}</h2>
+            {/* Added font-bold class to make the title bold */}
+            <h2 className="font-bold">{selectedCourse.code}: {selectedCourse.name}</h2>
             <div className="difficulty">
               <DifficultyDial difficulty={selectedCourse.difficulty} />
             </div>
@@ -73,11 +74,11 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
       {isExpanded && (
         <div className="featured-content">
           <p className="course-description">{selectedCourse.description}</p>
-          <div className="course-meta">
-            <span>Type: {selectedCourse.type}</span>
-            <span>Department: {selectedCourse.department}</span>
+          {/* Changed to flex-column to display metadata vertically */}
+          <div className="course-meta flex">
+            <span><strong>Type:</strong> {selectedCourse.type}</span>
+            <span><strong>Department:</strong> {selectedCourse.department}</span>
           </div>
-          <h3>Available Sections</h3>
           <div className="sections-table">
             <table>
               <thead>
