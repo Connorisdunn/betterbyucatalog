@@ -11,13 +11,16 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
       setIsExpanded(true);
     }
   }, [selectedCourse]);
+  
+  // Add a consistent top margin of 0 to align with other sections
   if (!selectedCourse) {
     return (
-      <div className="featured-class-placeholder">
+      <div className="featured-class-placeholder" style={{ marginTop: 0 }}>
         <p>Click a class to see its details</p>
       </div>
     );
   }
+  
   const isPinned = pinnedCourses?.some(course => course.id === selectedCourse.id);
   const renderTimeSlot = (timeSlot) => {
     return `${timeSlot.days.join('/')} ${timeSlot.startTime}-${timeSlot.endTime}`;
@@ -28,16 +31,16 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
     return Object.entries(selectedCourse.Sections_available)
       .filter(([_, section]) => section.Semester === selectedSemester);
   };
+  
   return (
-    <div className={`featured-class ${isExpanded ? 'expanded' : ''}`}>
+    <div className={`featured-class ${isExpanded ? 'expanded' : ''}`} style={{ marginTop: 0 }}>
       <div 
         className="featured-header"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="featured-title">
           <div className="title-content">
-            {/* Added font-bold class to make the title bold */}
-            <h2 className="font-bold">{selectedCourse.code}: {selectedCourse.name}</h2>
+            <h2>{selectedCourse.code}: {selectedCourse.name}</h2>
             <div className="difficulty">
               <DifficultyDial difficulty={selectedCourse.difficulty} />
             </div>
@@ -48,7 +51,6 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
           <span className="toggle-text">
             {isExpanded ? 'Click to collapse' : 'Click to expand'}
           </span>
-          {/* Pin/Unpin Button */}
           <button 
             className="pin-button"
             onClick={(e) => {
@@ -74,11 +76,11 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
       {isExpanded && (
         <div className="featured-content">
           <p className="course-description">{selectedCourse.description}</p>
-          {/* Changed to flex-column to display metadata vertically */}
-          <div className="course-meta flex">
-            <span><strong>Type:</strong> {selectedCourse.type}</span>
-            <span><strong>Department:</strong> {selectedCourse.department}</span>
+          <div className="course-meta">
+            <span>Type: {selectedCourse.type}</span>
+            <span>Department: {selectedCourse.department}</span>
           </div>
+          <h3>Available Sections</h3>
           <div className="sections-table">
             <table>
               <thead>
