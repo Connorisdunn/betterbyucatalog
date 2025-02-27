@@ -1,4 +1,4 @@
-// components/filters/FilterPanel.jsx
+// src/components/filters/FilterPanel.jsx
 import React from 'react';
 import { Dropdown } from '../common/Dropdown';
 import { departments } from '../../data/departments';
@@ -6,11 +6,11 @@ import { interests } from '../../data/interests';
 import { SemesterFilter } from './SemesterFilter';
 
 export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount }) {
-  // Add reset function
+  // Updated reset function to preserve the current semester filter
   const handleReset = () => {
     onFilterChange({
       searchTerm: '',
-      semester: '',
+      semester: filters.semester, // Preserve the semester filter
       departments: [],
       days: [],
       types: [],
@@ -22,14 +22,12 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
     <div className="filters">
       <div className="filters-header mb-0">
         <h2 className="filters-title m-0 p-0">Filters</h2>
-        {/* Add reset button */}
+        {/* The reset button is shown only when other filters (besides semester) are active */}
         <button 
           className="reset-button"
           onClick={handleReset}
           style={{ 
-            display: filters.searchTerm || filters.semester || 
-                    filters.departments.length || filters.days.length || 
-                    filters.types.length || filters.interests.length ? 'block' : 'none' 
+            display: filters.searchTerm || filters.departments.length || filters.days.length || filters.types.length || filters.interests.length ? 'block' : 'none' 
           }}
         >
           Reset All
@@ -42,14 +40,14 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
 
       <SemesterFilter 
         selected={filters.semester}
-        onChange={(semester) => onFilterChange({...filters, semester})}
+        onChange={(semester) => onFilterChange({ ...filters, semester })}
       />
 
       <Dropdown
         title="Department"
         options={departments}
         selected={filters.departments}
-        onChange={(departments) => onFilterChange({...filters, departments})}
+        onChange={(departments) => onFilterChange({ ...filters, departments })}
       />
 
       <div className="filter-section">
@@ -65,7 +63,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
                   const days = e.target.checked 
                     ? [...filters.days, day]
                     : filters.days.filter(d => d !== day);
-                  onFilterChange({...filters, days});
+                  onFilterChange({ ...filters, days });
                 }}
               />
               <label className="day-label" htmlFor={`day-${day}`}>{day}</label>
@@ -86,7 +84,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
                   const types = e.target.checked 
                     ? [...filters.types, type]
                     : filters.types.filter(t => t !== type);
-                  onFilterChange({...filters, types});
+                  onFilterChange({ ...filters, types });
                 }}
               /> {type}
             </label>
@@ -98,7 +96,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
         title="Interests"
         options={interests}
         selected={filters.interests}
-        onChange={(interests) => onFilterChange({...filters, interests})}
+        onChange={(interests) => onFilterChange({ ...filters, interests })}
       />
     </div>
   );
