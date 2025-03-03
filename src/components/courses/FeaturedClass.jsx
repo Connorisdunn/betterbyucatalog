@@ -76,10 +76,9 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
         <div className="featured-content">
           <p className="course-description">{selectedCourse.description}</p>
           <div className="course-meta">
-            <span>Type: {selectedCourse.type}</span>
-            <span>Department: {selectedCourse.department}</span>
+            <span><strong>Type:</strong> {selectedCourse.type}</span>
+            <span><strong>Department: </strong>{selectedCourse.department}</span>
           </div>
-          <h3>Available Sections</h3>
           <div className="sections-table">
             <table>
               <thead>
