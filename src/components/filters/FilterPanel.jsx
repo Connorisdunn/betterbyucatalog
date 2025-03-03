@@ -4,6 +4,7 @@ import { Dropdown } from '../common/Dropdown';
 import { departments } from '../../data/departments';
 import { interests } from '../../data/interests';
 import { SemesterFilter } from './SemesterFilter';
+import { FaFilter } from 'react-icons/fa';
 
 export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount }) {
   // Updated reset function to preserve the current semester filter
@@ -21,7 +22,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
   return (
     <div className="filters">
       <div className="filters-header mb-0">
-        <h2 className="filters-title m-0 p-0">Filters</h2>
+        <h2 className="filters-title m-0 p-0">Filters</h2><FaFilter className="mr-2" />
         {/* The reset button is shown only when other filters (besides semester) are active */}
         <button 
           className="reset-button"
