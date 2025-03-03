@@ -120,6 +120,7 @@ body {
   position: sticky;
   top: 20px;
   overflow: hidden;
+  padding-right: 0%;
 }
 
 .pinned-title {
@@ -351,6 +352,8 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%; /* Adjust based on your header height */
+  min-height: 500px; /* Minimum height for smaller screens */
   min-height: 0; /* Crucial for proper scrolling */
 }
 
@@ -505,6 +508,9 @@ body {
   margin: 0;
   margin-bottom: 0.5em;
   padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .credit-hours {
@@ -528,10 +534,7 @@ body {
   color: #6b7280;
   font-size: 0.9rem;
   line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
 }
 

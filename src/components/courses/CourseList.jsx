@@ -47,8 +47,10 @@ export function CourseList({
                       key={courses[i].id} 
                       style={{ 
                         width: itemWidth,
-                        marginRight: isLastInRow ? 0 : GAP
+                        marginRight: isLastInRow ? 0 : GAP,
+                        overflow: 'hidden'
                       }}
+                      className='HERE'
                     >
                       <CourseCard
                         course={courses[i]}
