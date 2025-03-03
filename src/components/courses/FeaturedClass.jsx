@@ -1,6 +1,6 @@
 // components/courses/FeaturedClass.jsx
 import React, { useState, useEffect } from 'react';
-import { FaTimes, FaThumbtack, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaTimes, FaThumbtack, FaChevronDown, FaChevronUp, FaListOl, FaCalendarAlt, FaClock, FaChalkboardTeacher, FaMapMarkerAlt, FaChair } from 'react-icons/fa';
 import { CircularProgress } from '../common/CircularProgress';
 import { DifficultyDial } from '../common/DifficultyDial';
 
@@ -81,17 +81,49 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
           </div>
           <div className="sections-table">
             <table>
-              <thead>
-                <tr>
-                  <th>Section</th>
-                  <th>Semester</th>
-                  <th>Time</th>
-                  <th>Professor</th>
-                  <th>Location</th>
-                  <th>Seats Left</th>
-                </tr>
-              </thead>
-              <tbody>
+            <thead>
+  <tr>
+    <th>
+      <div className="flex items-center justify-center">
+        <FaListOl className="mr-2" />
+        <span>Section</span>
+      </div>
+    </th>
+    <th>
+      <div className="flex items-center justify-center">
+        <FaCalendarAlt className="mr-2" />
+        <span>Semester</span>
+      </div>
+    </th>
+    <th>
+      <div className="flex items-center justify-center">
+        <FaClock className="mr-2" />
+        <span>Time</span>
+      </div>
+    </th>
+    <th>
+      <div className="flex items-center justify-center">
+        <FaChalkboardTeacher className="mr-2" />
+        <span>Professor</span>
+      </div>
+    </th>
+    <th>
+      <div className="flex items-center justify-center">
+        <FaMapMarkerAlt className="mr-2" />
+        <span>Location</span>
+      </div>
+    </th>
+    <th>
+      <div className="flex items-center justify-center">
+        <FaChair className="mr-2" />
+        <span>Seats Left</span>
+      </div>
+    </th>
+  </tr>
+</thead>
+
+
+              <tbody className="table-body-small">
                 {getFilteredSections().map(([sectionId, section]) => (
                   <tr key={sectionId}>
                     <td>{sectionId}</td>

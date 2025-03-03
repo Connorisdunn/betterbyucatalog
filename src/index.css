@@ -769,4 +769,11 @@ mark {
   padding: 3px 3px;
   white-space: nowrap;
 }
+.table-body-small td {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
 
+.table-body-small .CircularProgress {
+  transform: scale(0.8);
+}
