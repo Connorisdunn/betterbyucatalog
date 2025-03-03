@@ -1,6 +1,6 @@
 // components/courses/FeaturedClass.jsx
 import React, { useState, useEffect } from 'react';
-import { FaTimes, FaThumbtack } from 'react-icons/fa';
+import { FaTimes, FaThumbtack, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { CircularProgress } from '../common/CircularProgress';
 import { DifficultyDial } from '../common/DifficultyDial';
 
@@ -12,7 +12,6 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
     }
   }, [selectedCourse]);
   
-  // Add a consistent top margin of 0 to align with other sections
   if (!selectedCourse) {
     return (
       <div className="featured-class-placeholder" style={{ marginTop: 0 }}>
@@ -48,8 +47,8 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
           <div className="credit-hours">
             {selectedCourse.credits} Credits
           </div>
-          <span className="toggle-text">
-            {isExpanded ? 'Click to collapse' : 'Click to expand'}
+          <span className="toggle-icon" title={isExpanded ? 'Collapse' : 'Expand'}>
+            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
           </span>
           <button 
             className="pin-button"
