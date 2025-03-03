@@ -10,7 +10,9 @@ export function useCourseFilters() {
     departments: [],
     days: [],
     types: [],
-    interests: []
+    interests: [],
+    sortBy: 'code', // Default sort by course code
+    sortOrder: 'asc' // Default ascending order
   });
 
   const filteredCourses = useMemo(() => {
@@ -26,12 +28,28 @@ export function useCourseFilters() {
         return true;
       })
       .sort((a, b) => {
+        // If search term exists, sort by search score first
         if (filters.searchTerm) {
           const scoreA = searchCourse(a, filters.searchTerm).score;
           const scoreB = searchCourse(b, filters.searchTerm).score;
-          return scoreB - scoreA;
+          if (scoreA !== scoreB) {
+            return scoreB - scoreA;
+          }
         }
-        return a.code.localeCompare(b.code);
+        
+        // Then apply user-selected sorting
+        const sortOrder = filters.sortOrder === 'asc' ? 1 : -1;
+        
+        switch (filters.sortBy) {
+          case 'name':
+            return sortOrder * a.name.localeCompare(b.name);
+          case 'code':
+            return sortOrder * a.code.localeCompare(b.code);
+          case 'credits':
+            return sortOrder * (a.credits - b.credits);
+          default:
+            return sortOrder * a.code.localeCompare(b.code);
+        }
       });
   }, [filters]);
 

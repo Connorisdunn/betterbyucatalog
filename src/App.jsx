@@ -39,6 +39,9 @@ function App() {
             <SearchBar
               value={filters.searchTerm}
               onChange={(value) => setFilters({ ...filters, searchTerm: value })}
+              sortBy={filters.sortBy}
+              sortOrder={filters.sortOrder}
+              onSortChange={({ sortBy, sortOrder }) => setFilters({ ...filters, sortBy, sortOrder })}
             />
           </div>
         </div>
