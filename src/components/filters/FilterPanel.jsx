@@ -5,6 +5,8 @@ import { departments } from '../../data/departments';
 import { interests } from '../../data/interests';
 import { SemesterFilter } from './SemesterFilter';
 import { FaFilter } from 'react-icons/fa';
+import { FaCalendar } from 'react-icons/fa';
+import { FaGraduationCap } from 'react-icons/fa';
 
 export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount }) {
   // Updated reset function to preserve the current semester filter
@@ -22,8 +24,10 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
   return (
     <div className="filters">
       <div className="filters-header mb-0">
-        <h2 className="filters-title m-0 p-0">Filters</h2><FaFilter className="mr-2" />
-        {/* The reset button is shown only when other filters (besides semester) are active */}
+      <h2 className="filters-title m-0 p-0">
+    <FaFilter className="mr-2 inline-block align-text-bottom" />
+    <span>Filters</span>
+  </h2>
         <button 
           className="reset-button"
           onClick={handleReset}
@@ -52,7 +56,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
       />
 
       <div className="filter-section">
-        <h3>Days Taught</h3>
+        <h3><FaCalendar className="mr-3 inline-block align-text-bottom" />Days Taught</h3>
         <div className="days-group">
           {['M', 'T', 'W', 'TH', 'F'].map(day => (
             <div key={day} className="day-item">
@@ -74,7 +78,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
       </div>
 
       <div className="filter-section">
-        <h3>Type of Class</h3>
+        <h3><FaGraduationCap className="mr-3 inline-block align-text-bottom" />Type of Class</h3>
         <div className="checkbox-group">
           {['Online', 'In-Person', 'Hybrid'].map(type => (
             <label key={type} className="checkbox-label">
