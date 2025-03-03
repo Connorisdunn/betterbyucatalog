@@ -802,8 +802,54 @@ mark {
 .table-body-small td {
   font-size: 0.9rem;
   padding: 8px 12px;
+  text-align: center; /* Center the text horizontally */
+  vertical-align: middle; /* Center the content vertically */
+  border: 1px solid #e0e0e0; /* Add a light border to create a box effect */
+  background-color: #f9f9f9; /* Light background color for the box */
 }
 
 .table-body-small .CircularProgress {
   transform: scale(0.8);
+  margin: 0 auto; /* Center the CircularProgress component */
+}
+
+/* Add some spacing between rows for better readability */
+.table-body-small tr {
+  border-bottom: 2px solid #fff;
+}
+
+/* Hover effect for better interactivity */
+.table-body-small tr:hover td {
+  background-color: #f0f0f0;
+}
+
+
+
+.sections-table thead th {
+  background-color: #002E5D;
+  color: white; 
+  text-align: center; 
+  padding: 10px; 
+}
+
+.sections-table thead th .flex svg {
+  color: white; 
+}
+
+.table-header {
+  font-size: 14px; /* Adjust this value as needed */
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-header span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.table-header svg {
+  vertical-align: middle;
+  margin-right: 4px;
 }

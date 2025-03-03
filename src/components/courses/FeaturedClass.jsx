@@ -83,37 +83,37 @@ export function FeaturedClass({ selectedCourse, onClose, togglePin, pinnedCourse
             <table>
             <thead>
   <tr>
-    <th>
+    <th className="table-header">
       <div className="flex items-center justify-center">
         <FaListOl className="mr-2" />
         <span>Section</span>
       </div>
     </th>
-    <th>
+    <th className="table-header">
       <div className="flex items-center justify-center">
         <FaCalendarAlt className="mr-2" />
         <span>Semester</span>
       </div>
     </th>
-    <th>
+    <th className="table-header">
       <div className="flex items-center justify-center">
         <FaClock className="mr-2" />
         <span>Time</span>
       </div>
     </th>
-    <th>
+    <th className="table-header">
       <div className="flex items-center justify-center">
         <FaChalkboardTeacher className="mr-2" />
         <span>Professor</span>
       </div>
     </th>
-    <th>
+    <th className="table-header">
       <div className="flex items-center justify-center">
         <FaMapMarkerAlt className="mr-2" />
         <span>Location</span>
       </div>
     </th>
-    <th>
+    <th className="table-header">
       <div className="flex items-center justify-center">
         <FaChair className="mr-2" />
         <span>Seats Left</span>
