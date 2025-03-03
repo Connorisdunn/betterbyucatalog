@@ -478,6 +478,22 @@ body {
   flex-direction: column;
   height: 100%;
 }
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Adjust based on your header height */
+  min-height: 500px; /* Minimum height for smaller screens */
+  min-height: 0; /* Crucial for proper scrolling */
+  padding-top: 1.5rem; /* Add breathing room at the top */
+}
+
+/* Course list and pagination container */
+.course-list-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
 .course-grid {
   flex: 1;
@@ -884,4 +900,40 @@ body {
   padding-top: 20px;
   max-width: 100%;
   text-align: center;
+}
+/* Modern scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* Additional spacing for featured class */
+.featured-class {
+  margin-top: 0.5rem;
+}
+
+/* Update main content padding */
+.main-content {
+  padding-top: 1.5rem;
 }
