@@ -102,6 +102,7 @@ export function FilterPanel({ filters, onFilterChange, filteredCount, totalCount
         options={interests}
         selected={filters.interests}
         onChange={(interests) => onFilterChange({ ...filters, interests })}
+        enableSearch={true} // Enable search for interests
       />
     </div>
   );
