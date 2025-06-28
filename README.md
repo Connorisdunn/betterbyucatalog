@@ -66,7 +66,8 @@ Your app should now be running at [http://localhost:5173/](http://localhost:5173
 ## Photos of Our Project In Comparison to Actual Website
 
 ### Our Project
-<img width="450" alt="Screenshot 2025-06-28 at 1 29 04 PM" src="https://github.com/user-attachments/assets/d9e6ef18-454a-4fca-8204-59987312c607" />
+<img width="450" alt="Screenshot 2025-06-28 at 1 33 46 PM" src="https://github.com/user-attachments/assets/cc83b53c-c2d3-4695-87c5-60532b1a3fb8" />
+
 
 <img width="450" alt="Screenshot 2025-06-28 at 1 31 44 PM" src="https://github.com/user-attachments/assets/693df49e-4c55-4f53-bfb7-bd482439bc21" />
 
